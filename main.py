@@ -79,19 +79,21 @@ def advt2_part1_code():
 
 def advt2_part2_code():
     game_power_sum = 0
-    fewest_cubes = {"red": 0, "green": 0, "blue": 0}
     with open('inputs/advtc2-input.txt', 'r') as file:
         for line in file:
             game_sets = line.strip().split(":")[1].split(";")
+            fewest_cubes = {"red": 0, "green": 0, "blue": 0}
             for game_set in game_sets:
                 cube_colors = game_set.split(",")
-                print(cube_colors)
+                fewest_cubes_tmp = {"red": 0, "green": 0, "blue": 0}
                 for cube_color in cube_colors:
-                    cube_number = ''.join(char for char in cube_color if char.isdigit())
+                    cube_number = int(''.join(char for char in cube_color if char.isdigit()))
                     cube_color = ''.join(char for char in cube_color if char.isalpha())
-                    fewest_cubes[cube_color] = cube_number
-                
-                if cube_number game_rules[color]
+                    fewest_cubes_tmp[cube_color] = cube_number
+                    if fewest_cubes[cube_color] < fewest_cubes_tmp[cube_color]:
+                        fewest_cubes[cube_color] = fewest_cubes_tmp.get(cube_color)
+            print(fewest_cubes)
+            game_power_sum = game_power_sum + ( fewest_cubes.get("red") * fewest_cubes.get("green") * fewest_cubes.get("blue"))
         print("Game power sum = " + str(game_power_sum))
 
 
